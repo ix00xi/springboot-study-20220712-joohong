@@ -2,18 +2,20 @@ package com.springboot.studyjoohong.service.board;
 
 import org.springframework.stereotype.Service;
 
+import com.springboot.studyjoohong.domain.board.BoardRepository;
 import com.springboot.studyjoohong.web.dto.board.CreateBoardReqDto;
 
-@Service
-public class BoardServiceImpl implements BoardService {
+import lombok.RequiredArgsConstructor;
 
+@Service
+@RequiredArgsConstructor
+public class BoardServiceImpl implements BoardService {
+	
+	private final BoardRepository boardRepository;
+	
 	@Override
 	public boolean createBoard(CreateBoardReqDto createBoardReqDto) throws Exception {
-		System.out.println(createBoardReqDto);
-		if(0 == 0) {
-			throw new RuntimeException();
-		}
-		return true;
+		return boardRepository.save(createBoardReqDto.toEntity()) > 0;
 	}
 	
 	@Override
